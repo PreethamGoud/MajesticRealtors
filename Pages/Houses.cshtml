@@ -1,0 +1,69 @@
+﻿@page
+@model MajesticRealtors.Pages.HousesModel
+@{
+    ViewData["Title"] = "Houses";
+    var TheHousesList = (List<HouseData.Houses>)ViewData["UserHousesList"];
+}
+
+<div>
+    </br></br></br></br></br>
+    <link rel="stylesheet" href="/css/StyleSheet.css" type="text/css" />
+    <div class="container">
+        <div>
+            <form method="get" class="row">
+                <div class="input-group row">
+                    <div style="color: goldenrod" class="col-sm-2 font-weight-bold"> Community Area  </div>
+                    <select class="form-control" name="query" asp-for="@Model.SearchArea" asp-items="ViewBag.SearchArea"></select>
+                    <div class="input-group-append">
+                        <input type="submit" value="Search" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+            @if (string.IsNullOrWhiteSpace(Model.SearchArea))
+            {
+                <div class="alert alert-light"> Please choose a community area.</div>
+            }
+            else if (TheHousesList == null)
+            {
+                <div class="alert alert-info"> Data for houses in this @Model.SearchArea community area  not found.</div>
+            }
+            else
+
+            {
+                <div>
+                    <table class="myTable">
+                        <tr>
+                            <th>Property Name</th>
+                            <th>Address</th>
+                            <th>Community Area</th>
+                            <th>Community Number</th>
+                            <th>Units</th>
+                            <th>Phone_Number</th>
+                            <th>Management Company</th>
+                        </tr>
+                        @{
+                            int FirstTenHouses = 0;
+                            foreach (HouseData.Houses house in TheHousesList)
+                            {
+                                FirstTenHouses = FirstTenHouses + 1;
+                                <tr>
+                                    <td>@house.PropertyName</td>
+                                    <td>@house.Address</td>
+                                    <td>@house.CommunityArea</td>
+                                    <td> <a asp-page="./Lands" asp-route-query="@house.CommunityAreaNumber">@house.CommunityAreaNumber</a> </td>
+                                    <td>@house.Units</td>
+                                    <td>@house.PhoneNumber </td>
+                                    <td>@house.ManagementCompany</td>
+                                </tr>
+
+                                if (FirstTenHouses == 10)
+                                { break; }
+                            }
+                        }
+                    </table>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
