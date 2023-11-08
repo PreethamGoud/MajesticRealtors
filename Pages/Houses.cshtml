@@ -1,0 +1,34 @@
+﻿@page
+@model MajesticRealtors.Pages.HousesModel
+@{
+    ViewData["Title"] = "Houses";
+    var TheHousesList = (List<HouseData.Houses>)ViewData["UserHousesList"];
+}
+
+<div>
+    </br></br></br></br></br>
+    <link rel="stylesheet" href="/css/StyleSheet.css" type="text/css" />
+    <div class="container">
+        <div>
+            <form method="get" class="row">
+                <div class="input-group row">
+                    <div style="color: goldenrod" class="col-sm-2 font-weight-bold"> Community Area  </div>
+                    <select class="form-control" name="query" asp-for="@Model.SearchArea" asp-items="ViewBag.SearchArea"></select>
+                    <div class="input-group-append">
+                        <input type="submit" value="Search" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+            @if (string.IsNullOrWhiteSpace(Model.SearchArea))
+            {
+                <div class="alert alert-light"> Please choose a community area.</div>
+            }
+            else if (TheHousesList == null)
+            {
+                <div class="alert alert-info"> Data for houses in this @Model.SearchArea community area  not found.</div>
+            }
+            else
+            
+        </div>
+    </div>
+</div>
