@@ -28,7 +28,42 @@
                 <div class="alert alert-info"> Data for houses in this @Model.SearchArea community area  not found.</div>
             }
             else
-            
+
+            {
+                <div>
+                    <table class="myTable">
+                        <tr>
+                            <th>Property Name</th>
+                            <th>Address</th>
+                            <th>Community Area</th>
+                            <th>Community Number</th>
+                            <th>Units</th>
+                            <th>Phone_Number</th>
+                            <th>Management Company</th>
+                        </tr>
+                        @{
+                            int FirstTenHouses = 0;
+                            foreach (HouseData.Houses house in TheHousesList)
+                            {
+                                FirstTenHouses = FirstTenHouses + 1;
+                                <tr>
+                                    <td>@house.PropertyName</td>
+                                    <td>@house.Address</td>
+                                    <td>@house.CommunityArea</td>
+                                    <td> <a asp-page="./Lands" asp-route-query="@house.CommunityAreaNumber">@house.CommunityAreaNumber</a> </td>
+                                    <td>@house.Units</td>
+                                    <td>@house.PhoneNumber </td>
+                                    <td>@house.ManagementCompany</td>
+                                </tr>
+
+                                if (FirstTenHouses == 10)
+                                { break; }
+                            }
+                        }
+                    </table>
+                </div>
+            }
+
         </div>
     </div>
 </div>
