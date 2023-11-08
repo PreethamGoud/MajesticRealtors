@@ -101,4 +101,28 @@
         [JsonProperty("human_address")]
         public string HumanAddress { get; set; }
     }
+
+    public partial class Lands
+    {
+        public static List<Lands> FromJson(string json) => JsonConvert.DeserializeObject<List<Lands>>(json, LandData.Converter.Settings);
+    }
+
+    public static class Serialize
+    {
+        public static string ToJson(this List<Lands> self) => JsonConvert.SerializeObject(self, LandData.Converter.Settings);
+    }
+
+    internal static class Converter
+    {
+        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        {
+            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
+            DateParseHandling = DateParseHandling.None,
+            Converters =
+           {
+               new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
+           },
+        };
+    }
+
 }
