@@ -3,7 +3,8 @@
 
 # Introduction
 
-This website aims at providing users a one stop portal for finding their dream home and land to setup their business in the city of Chicago
+This website aims at providing users a one stop portal for finding their dream home and land to setup their business in the City of Chicago.  <br/>  
+
 •	Enter Area Name / Area Number in City of Chicago.  <br/>  
 •	View the apartments/houses list.  <br/>  
 •	Also find the empty spaces nearby to setup your business (At lowest cost provided by the City Government itself).  <br/>  
