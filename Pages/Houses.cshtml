@@ -6,15 +6,17 @@
 }
 
 <div>
-    </br></br></br></br></br>
+    </br></br></br></br>
     <link rel="stylesheet" href="/css/StyleSheet.css" type="text/css" />
     <div class="container">
         <div>
-            <form method="get" class="row">
+            <form method="get">
                 <div class="input-group row">
-                    <div style="color: goldenrod" class="col-sm-2 font-weight-bold"> Community Area  </div>
-                    <select class="form-control" name="query" asp-for="@Model.SearchArea" asp-items="ViewBag.SearchArea"></select>
-                    <div class="input-group-append">
+                    <label for="SearchItem" style="color: #ffc800" class="control-label"> <strong>Housing Inventories</strong></label>
+                    </br></br>
+                    <div style="color: #ffc800" class="col-2 font-weight-bold">Select Community Area</div>
+                        <select class="form-select col" aria-label="Large select example" name="query" asp-for="@Model.SearchArea" asp-items="ViewBag.SearchArea"></select>
+                    <div class="col-2">
                         <input type="submit" value="Search" class="btn btn-primary" />
                     </div>
                 </div>
@@ -31,8 +33,9 @@
 
             {
                 <div>
-                    <table class="myTable">
-                        <tr>
+                    </br></br>
+                    <table class="table table-bordered table-hover">
+                        <tr id="table-header">
                             <th>Property Name</th>
                             <th>Address</th>
                             <th>Community Area</th>
