@@ -21,9 +21,20 @@ namespace MajesticRealtors.Pages
                 {
                     Lands_data = webClient.DownloadString("https://data.cityofchicago.org/resource/aksk-kvfp.json");
                 }
+                // implemented specific exceptions related to web requests, for better error reporting instead of generic one.
+                catch (WebException webEx)
+                {
+                    // Handle web request-related exceptions.
+                    Console.WriteLine("WebException during API call - Land Inventory: " + webEx.Message);
+                    ViewData["UserLandsList"] = null;
+                    return; 
+                }
                 catch (Exception e)
                 {
-                    throw new Exception("Error during API call - Land Inventory", e);
+                    // Handle other exceptions.
+                    Console.WriteLine("Exception during API call - Land Inventory: " + e.Message);
+                    ViewData["UserLandsList"] = null;
+                    return; 
                 }
                 var AllLandInventory = LandData.Lands.FromJson(Lands_data);
 
