@@ -31,9 +31,11 @@ namespace MajesticRealtors.Pages
                 {
                     var AllLandsList = AllLandInventory.ToList();
                     long UserCommunityNumber = (long)Convert.ToDouble(query);
-                    var CommunityLand = AllLandsList.FindAll(x => (x.CommunityAreaNumber == UserCommunityNumber));
-                    CommunityLand = CommunityLand.FindAll(x => x.SqFt >= 0);
-                    CommunityLand = CommunityLand.OrderByDescending(x => x.SqFt).ToList();
+                    // Instead of multiple calls to FindAll and modifying the same list in place, used LINQ to filter the data in a more readable and functional way
+                    var CommunityLand = AllLandsList
+                     .Where(x => x.CommunityAreaNumber == UserCommunityNumber && x.SqFt >= 0)
+                     .OrderByDescending(x => x.SqFt)
+                     .ToList();
                     if (CommunityLand != null && CommunityLand.Count > 0)
                     {
                         ViewData["UserLandsList"] = CommunityLand;
@@ -50,6 +52,7 @@ namespace MajesticRealtors.Pages
                 CommunityNumberItem = query;
             }
         }
+
 
     }
 }
