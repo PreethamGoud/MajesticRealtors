@@ -6,20 +6,19 @@
 }
 
 <div>
-    </br></br></br></br>
+    </br></br></br></br></br>
     <link rel="stylesheet" href="/css/StyleSheet.css" type="text/css" />
     <div class="container">
 
         <form method="get">
-            <div class="form-group">
-                <label for="SearchItem" style="color: goldenrod" class="control-label"> <strong>Land Inventories</strong></label>
-                <div style="color: goldenrod" class="mb-5">
-                    <strong>Search by </strong> <span style="color: goldenrod" class="span_style"><strong>Community Number</strong></span>&nbsp;&nbsp;&nbsp;
+            <div class="form-group row">
+                <label for="SearchItem" style="color: #ffc800" class="control-label"> <strong>Land Inventories</strong></label>
+                </br></br>
+                <div style="color: #ffc800" class="col-2 font-weight-bold">Enter Community Number</div>
+                <input id="SearchItem" value="@Model.CommunityNumberItem" name="query" class="col form-control" type="text" />
+                <div class="col-2">
+                    <input type="submit" value="Search" class="btn btn-primary" />
                 </div>
-                <input id="SearchItem" value="@Model.CommunityNumberItem" name="query" class="form-control" type="text" />
-            </div>
-            <div style="margin-bottom:20px;">
-                <input class="btn btn-primary" type="submit" value="Search" />
             </div>
         </form>
 
@@ -33,9 +32,10 @@
         }
         else
         {
-            <div>                
-                <table class="myTable">
-                    <tr>
+            <div>        
+                </br></br>
+                <table class="table table-bordered table-hover">
+                    <tr id="table-header">
                         <th>Property Status</th>
                         <th>Managing Org</th>
                         <th>Community Area</th>

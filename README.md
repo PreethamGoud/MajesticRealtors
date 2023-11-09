@@ -1,5 +1,5 @@
 # MajesticRealtors
-<img src="https://github.com/PreethamGoud/MajesticRealtors.git" width="350" alt="accessibility text">
+<img src="https://github.com/PreethamGoud/MajesticRealtors/blob/Feature/wwwroot/assets/img/Majestic Realtors-logos/Majestic Realtors-logos.jpeg" width="350" alt="accessibility text">
 
 # Introduction
 This online platform is dedicated to offering users a convenient solution for locating their perfect home and business location in Chicago.
