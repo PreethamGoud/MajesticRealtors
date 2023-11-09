@@ -2,12 +2,13 @@
 <img src="https://github.com/PreethamGoud/MajesticRealtors/blob/Feature/wwwroot/assets/img/Majestic Realtors-logos/Majestic Realtors-logos.jpeg" width="350" alt="accessibility text">
 
 # Introduction
-This website aims at providing users a one stop portal for finding their dream home and land to setup their business in the City of Chicago.  <br/>  
+This online platform is dedicated to offering users a convenient solution for locating their perfect home and business location in Chicago.
 
+• Specify the area name or number within the city.
 
-•	Enter Area Name / Area Number in City of Chicago.  <br/>  
-•	View the apartments/houses list.  <br/>  
-•	Also find the empty spaces nearby to setup your business (At lowest cost provided by the City Government itself).  <br/>  
+• Explore nearby vacant spaces for your business setup, with the lowest costs provided directly by the City Government.
+
+• Access the comprehensive list of apartments and houses available.   <br/>  
 
 # DataFeeds
 
@@ -16,13 +17,13 @@ This website aims at providing users a one stop portal for finding their dream h
 
 # Requirements
 
-Requirement_1: Find your Housing  <br/> 
-Scenario: As a business owner when I move from different city to Chicago or I being a resident needs to set up a business, I want to be able to search places in Chicago for affordable housing for my workforce or myself.  <br/>
-Assumptions: Click on Housing and select the Community Area you are interested in living in.  <br/>
+Requirement_1: Find Housing  <br/> 
+Situation: As a business owner relocating from another city to Chicago or as a resident planning to establish a business, I aim to find affordable housing options in Chicago for my employees or myself.  <br/>
+Assumptions: Click on the "Housing" option and choose the specific Community Area where you wish to reside.  <br/>
 Examples:  <br/>
 Given a selected area as Englewood.  <br/>
-When I search for Housing/Apartments in that area  <br/>
-Then I should receive list of all available Housing and its details in that area.  <br/>
+When I search for Housing/Apartments/Lands in that area  <br/>
+Then I should be provided with a detailed list of all the housing options available in that area. <br/>
 
 Victoria Jennings Residences	624 W. 61st St.	Englewood	68
 57	773-994-3690	HSR Property Services, LLC
@@ -30,15 +31,15 @@ Victoria Jennings Residences	624 W. 61st St.	Englewood	68
 Hope Manor Village	5900-6100 S. Green/Peoria/Sangamon	Englewood	68
 36	312-564-2393	Volunteers of America Illinois
 
-Requirement_2: Find the land to setup your business  <br/>
-Scenario: As a business owner when I move from a different city to Chicago or I being a resident needs to set up a business, I want to be able to search places in Chicago for setting up my business at affordable prices. So, I will check the city owned land inventory data. I may also use community numbers to find the land for my business.  <br/>
+Requirement_2: Locate a suitable plot of land for establishing your business.  <br/>
+Situation: When I, as a business owner, relocate from another city to Chicago or as a resident aiming to establish a business, I need the ability to explore affordable options for setting up my business. Therefore, I intend to review the city's inventory data of available lands. Additionally, I may utilize community numbers to identify suitable land for my business venture.  <br/>
 Assumptions: Click on Lands and under Community Number, enter the relevant area number you are interested in living in.
-The search term is Community Area Number pertaining to the city of Chicago only. Community Area Number is a 2-digit number 
+The search term is Community Area Number about the city of Chicago only. Community Area Number is a 2-digit number 
  <br/>
 Examples:  <br/>
-Given a Community Area Number is 23  <br/>
-When I search for land details in that community  <br/>
-Then I should receive list of all available land details in that community   <br/>
+If I have a specific Community Area Number, lets say 36  <br/>
+When I look for information about land in that particular community.  <br/>
+I anticipate receiving a complete list of all the land information available in that specific community.  <br/>
 
 Owned by City	DPD - Planning	HUMBOLDT PARK	3625 W CHICAGO AVE	60651	9683	41.89523451453931	-87.71717748680612
 
