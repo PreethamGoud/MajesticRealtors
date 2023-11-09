@@ -38,7 +38,7 @@
         </nav>-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="#page-top"><img src="~/assets/img/navbar-logo1.svg" alt="..." /></a>
+                <a class="navbar-brand" asp-page="/index"><img src="~/assets/img/MR_logo.svg" alt="..." /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars ms-1"></i>
@@ -47,20 +47,20 @@
             <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                 <li class="nav-item"><a class="nav-link" style="font-weight: bold" asp-area="" asp-page="/Houses">Housing</a></li>
                 <li class="nav-item"><a class="nav-link" style="font-weight: bold" asp-area="" asp-page="/Lands">Lands</a></li>
-                <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                @* <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
                 <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                <li class="nav-item">
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li> *@
+                @* <li class="nav-item">
                     <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">REGISTER</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">LOGIN</a>
-                </li>
+                </li> *@
             </ul>
         </div>
-        <partial name="_LoginPartial" />
+        @* <partial name="_LoginPartial" /> *@
     </div>
 </nav>
     </header>
