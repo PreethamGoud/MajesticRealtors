@@ -31,9 +31,10 @@ namespace MajesticRealtors.Pages
                 {
                     var AllLandsList = AllLandInventory.ToList();
                     long UserCommunityNumber = (long)Convert.ToDouble(query);
-                    var CommunityLand = AllLandsList.FindAll(x => (x.CommunityAreaNumber == UserCommunityNumber));
-                    CommunityLand = CommunityLand.FindAll(x => x.SqFt >= 0);
-                    CommunityLand = CommunityLand.OrderByDescending(x => x.SqFt).ToList();
+                    var CommunityLand = AllLandInventory
+                        .Where(x => x.CommunityAreaNumber == UserCommunityNumber && x.SqFt >= 0)
+                        .OrderByDescending(x => x.SqFt)
+                        .ToList();
                     if (CommunityLand != null && CommunityLand.Count > 0)
                     {
                         ViewData["UserLandsList"] = CommunityLand;

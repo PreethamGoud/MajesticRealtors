@@ -9,6 +9,7 @@ namespace MajesticRealtors.Pages
 
     public class IndexModel : PageModel
     {
+        static readonly HttpClient httpClient = new HttpClient();
         private readonly ILogger<IndexModel> _logger;
 
         public IndexModel(ILogger<IndexModel> logger)
@@ -16,27 +17,18 @@ namespace MajesticRealtors.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-
-
-            using (var webClient = new WebClient())
+            using (var httpClient = new HttpClient())
             {
-
-                var houseJSON = webClient.DownloadString("https://data.cityofchicago.org/resource/s6ha-ppgi.json");
-                List<Houses> houseCollection = Houses.FromJson(houseJSON);
-
+                var houseJSON = await httpClient.GetStringAsync("https://data.cityofchicago.org/resource/s6ha-ppgi.json");
+                var houseCollection = Houses.FromJson(houseJSON);
                 ViewData["Houses"] = houseCollection;
 
-                var landJSON = webClient.DownloadString("https://data.cityofchicago.org/resource/aksk-kvfp.json");
-                List<Lands> landCollection = Lands.FromJson(landJSON);
-
-
+                var landJSON = await httpClient.GetStringAsync("https://data.cityofchicago.org/resource/aksk-kvfp.json");
+                var landCollection = Lands.FromJson(landJSON);
                 ViewData["Lands"] = landCollection;
-
             }
-
-
         }
     }
 }
