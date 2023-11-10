@@ -4163,17 +4163,17 @@ fieldset:disabled .btn {
 }
 
 .nav {
-    --bs-nav-link-padding-x: 1rem;
-    --bs-nav-link-padding-y: 0.5rem;
-    --bs-nav-link-font-weight:;
-    --bs-nav-link-color: var(--bs-link-color);
-    --bs-nav-link-hover-color: var(--bs-link-hover-color);
-    --bs-nav-link-disabled-color: #6c757d;
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: 0;
-    margin-bottom: 0;
-    list-style: none;
+  --bs-nav-link-padding-x: 1rem;
+  --bs-nav-link-padding-y: 0.5rem;
+  --bs-nav-link-font-weight: ;
+  --bs-nav-link-color: var(--bs-link-hover-color);
+  --bs-nav-link-hover-color: var(--bs-link-hover-color);
+  --bs-nav-link-disabled-color: #6c757d;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
 }
 
 .nav-link {
@@ -4251,9 +4251,9 @@ fieldset:disabled .btn {
 }
 
 .nav-pills {
-    --bs-nav-pills-border-radius: 0.375rem;
-    --bs-nav-pills-link-active-color: #fff;
-    --bs-nav-pills-link-active-bg: #ffc800;
+  --bs-nav-pills-border-radius: 0.375rem;
+  --bs-nav-pills-link-active-color: #fff;
+  --bs-nav-pills-link-active-bg: #ffc800;
 }
 
 .nav-pills .nav-link {
