@@ -23,10 +23,18 @@ namespace MajesticRealtors.Pages
                 {
                     Houses_data = webClient.DownloadString("https://data.cityofchicago.org/resource/s6ha-ppgi.json");
                 }
+                // implemented specific exceptions related to web requests, for better error reporting instead of generic one.
+                catch (WebException webEx)
+                {
+                    // Handle web request-related exceptions.
+                    Console.WriteLine("WebException during API call - Housing: " + webEx.Message);
+                    ViewData["UserHousesList"] = null;
+                    return;
+                }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Error during API call - Housing", e);
-
+                    // Handle other exceptions.
+                    Console.WriteLine("Exception during API call - Housing: " + e.Message);
                 }
                 var AllHousing = HouseData.Houses.FromJson(Houses_data);
 
