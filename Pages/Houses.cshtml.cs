@@ -12,6 +12,8 @@ namespace MajesticRealtors.Pages
         public SelectList AreaList { get; set; }
         public string SearchArea { get; set; }
         public List<string> AllAreaList { get; set; }
+        private const string HousingApiUrl = "https://data.cityofchicago.org/resource/s6ha-ppgi.json";
+
 
         public void Onget(string query)
         {
@@ -25,7 +27,7 @@ namespace MajesticRealtors.Pages
                     string Houses_data = string.Empty;
                     try
                     {
-                        Houses_data = webClient.DownloadString("https://data.cityofchicago.org/resource/s6ha-ppgi.json");
+                        Houses_data = webClient.DownloadString(HousingApiUrl);
                     }
                     catch (Exception e)
                     {

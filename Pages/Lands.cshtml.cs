@@ -10,6 +10,7 @@ namespace MajesticRealtors.Pages
     public class LandsModel : PageModel
     {
         private readonly ILogger<HousesModel> _logger;
+        private const string LandApiUrl = "https://data.cityofchicago.org/resource/aksk-kvfp.json";
         [BindProperty]
         public string CommunityNumberItem { get; set; }
 
@@ -23,7 +24,7 @@ namespace MajesticRealtors.Pages
                 string Lands_data = string.Empty;
                 try
                 {
-                    Lands_data = webClient.DownloadString("https://data.cityofchicago.org/resource/aksk-kvfp.json");
+                    Lands_data = webClient.DownloadString(LandApiUrl);
                 }
                 catch (Exception e)
                 {
