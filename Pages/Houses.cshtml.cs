@@ -7,6 +7,7 @@ namespace MajesticRealtors.Pages
 {
     public class HousesModel : PageModel
     {
+        private readonly ILogger<HousesModel> _logger;
         [BindProperty]
         public SelectList AreaList { get; set; }
         public string SearchArea { get; set; }
@@ -16,41 +17,50 @@ namespace MajesticRealtors.Pages
         {
             InitAreaDropDown();
 
-            using (var webClient = new WebClient())
+            try
             {
-                string Houses_data = string.Empty;
-                try
-                {
-                    Houses_data = webClient.DownloadString("https://data.cityofchicago.org/resource/s6ha-ppgi.json");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Error during API call - Housing", e);
 
-                }
-                var AllHousing = HouseData.Houses.FromJson(Houses_data);
-
-                if (!string.IsNullOrWhiteSpace(query))
+                using (var webClient = new WebClient())
                 {
-                    var AllhousingList = AllHousing.ToList();
-                    var CommunityHousing = AllhousingList.FindAll(x => string.Equals(x.CommunityArea, query, StringComparison.OrdinalIgnoreCase)).ToList();
-
-                    if (CommunityHousing != null && CommunityHousing.Count > 0)
+                    string Houses_data = string.Empty;
+                    try
                     {
+                        Houses_data = webClient.DownloadString("https://data.cityofchicago.org/resource/s6ha-ppgi.json");
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Error during API call - Housing", e);
 
-                        ViewData["UserHousesList"] = CommunityHousing;
+                    }
+                    var AllHousing = HouseData.Houses.FromJson(Houses_data);
+
+                    if (!string.IsNullOrWhiteSpace(query))
+                    {
+                        var AllhousingList = AllHousing.ToList();
+                        var CommunityHousing = AllhousingList.Where(x => string.Equals(x.CommunityArea, query, StringComparison.OrdinalIgnoreCase)).ToList();
+
+                        if (CommunityHousing != null && CommunityHousing.Count > 0)
+                        {
+
+                            ViewData["UserHousesList"] = CommunityHousing;
+                        }
+                        else
+                        {
+                            ViewData["UserHousesList"] = null;
+                        }
                     }
                     else
                     {
                         ViewData["UserHousesList"] = null;
                     }
+                    SearchArea = query;
                 }
-                else
-                {
-                    ViewData["UserHousesList"] = null;
-                }
-                SearchArea = query;
             }
+            catch (Exception e)
+            {
+                _logger.LogError("Error during API call - Housing", e);
+            }
+
         }
 
         private void InitAreaDropDown()
@@ -135,3 +145,4 @@ namespace MajesticRealtors.Pages
 
     }
 }
+
