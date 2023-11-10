@@ -4,68 +4,74 @@
     ViewData["Title"] = "LandInventory";
     var TheLandsList = (List<LandData.Lands>)ViewData["UserLandsList"];
 }
-
-<div>
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- The HTML structure is simplified, and CSS is linked in the <head> section. -->
+    <meta charset="utf-8">
+    <title>@ViewData["Title"]</title>
     </br></br></br></br></br>
-    <link rel="stylesheet" href="/css/StyleSheet.css" type="text/css" />
+    <link rel="stylesheet" href="/css/StyleSheet.css" type="text/css">
+</head>
+<body>
     <div class="container">
+        <h1 style="color: #ffc800">Land Inventories</h1>
 
         <form method="get">
             <div class="form-group row">
-                <label for="SearchItem" style="color: #ffc800" class="control-label"> <strong>Land Inventories</strong></label>
-                </br></br>
-                <div style="color: #ffc800" class="col-2 font-weight-bold">Enter Community Number</div>
-                <input id="SearchItem" value="@Model.CommunityNumberItem" name="query" class="col form-control" type="text" />
+                <label for="SearchItem" style="color: #ffc800" class="col-2 font-weight-bold">Enter Community Number</label>
+                <div class="col">
+                    <input id="SearchItem" value="@Model.CommunityNumberItem" name="query" class="form-control" type="text">
+                </div>
                 <div class="col-2">
-                    <input type="submit" value="Search" class="btn btn-primary" />
+                    <input type="submit" value="Search" class="btn btn-primary">
                 </div>
             </div>
         </form>
-
+        <!-- alert messages are used for better usage -->
         @if (string.IsNullOrWhiteSpace(Model.CommunityNumberItem))
         {
-
+            <div class="alert alert-info">Please enter a Community Number to search for land inventories.</div>
         }
         else if (TheLandsList == null)
         {
-            <div class="alert alert-info"> Data for Lands in this Community area number [@Model.CommunityNumberItem] not found.</div>
+            <div class="alert alert-info">Data for lands in Community Area [@Model.CommunityNumberItem] not found.</div>
         }
         else
         {
             <div>
-                <br></br>
                 <table class="table table-bordered table-hover">
-                    <tr id="table-header">
-                        <th>Property Status</th>
-                        <th>Managing Org</th>
-                        <th>Community Area</th>
-                        <th>Address</th>
-                        <th>ZipCode</th>
-                        <th>Area Available</th>
-                        <th>Latitude</th>
-                        <th>Longitude</th>
-                    </tr>
-                    @{
-                        int FirstTenLands = 0;
-                        foreach (LandData.Lands land in TheLandsList)
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Property Status</th>
+                            <th>Managing Org</th>
+                            <th>Community Area</th>
+                            <th>Address</th>
+                            <th>Zip Code</th>
+                            <th>Area Available</th>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <!-- LINQ method is used to limit the display to the first ten records, simplifying the loop. -->
+                        @foreach (LandData.Lands land in TheLandsList.Take(10))
                         {
-                            FirstTenLands = FirstTenLands + 1;
                             <tr>
                                 <td>@land.PropertyStatus</td>
                                 <td>@land.ManagingOrganization</td>
                                 <td>@land.CommunityAreaName</td>
                                 <td>@land.Address</td>
-                                <td>@land.ZipCode </td>
-                                <td>@land.SqFt </td>
+                                <td>@land.ZipCode</td>
+                                <td>@land.SqFt</td>
                                 <td>@land.Latitude</td>
                                 <td>@land.Longitude</td>
                             </tr>
-                            if (FirstTenLands == 10)
-                            { break; }
                         }
-                    }
+                    </tbody>
                 </table>
             </div>
         }
     </div>
-</div>
+</body>
+</html>
