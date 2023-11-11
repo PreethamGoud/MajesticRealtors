@@ -9,17 +9,22 @@ namespace MajesticRealtors.Pages
 {
     public class LandsModel : PageModel
     {
+        private readonly ILogger<HousesModel> _logger;
+        private const string LandApiUrl = "https://data.cityofchicago.org/resource/aksk-kvfp.json";
         [BindProperty]
         public string CommunityNumberItem { get; set; }
 
+
         public async Task OnGetAsync(string query)
         {
-            using (var webClient = new WebClient())
+            try
+            {
+                using (var webClient = new WebClient())
             {
                 string Lands_data = string.Empty;
                 try
                 {
-                    Lands_data = webClient.DownloadString("https://data.cityofchicago.org/resource/aksk-kvfp.json");
+                    Lands_data = webClient.DownloadString(LandApiUrl);
                 }
                 catch (Exception e)
                 {
@@ -27,10 +32,10 @@ namespace MajesticRealtors.Pages
                 }
                 var AllLandInventory = LandData.Lands.FromJson(Lands_data);
 
-                if (!string.IsNullOrWhiteSpace(query))
+                if (!string.IsNullOrWhiteSpace(query) && double.TryParse(query, out double convertedValue))
                 {
                     var AllLandsList = AllLandInventory.ToList();
-                    long UserCommunityNumber = (long)Convert.ToDouble(query);
+                    long UserCommunityNumber = (long)convertedValue;
                     var CommunityLand = AllLandsList.FindAll(x => (x.CommunityAreaNumber == UserCommunityNumber));
                     CommunityLand = CommunityLand.FindAll(x => x.SqFt >= 0);
                     CommunityLand = CommunityLand.OrderByDescending(x => x.SqFt).ToList();
@@ -48,6 +53,11 @@ namespace MajesticRealtors.Pages
                     ViewData["UserLandsList"] = null;
                 }
                 CommunityNumberItem = query;
+            }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Error during API call - Lands", e);
             }
         }
 
