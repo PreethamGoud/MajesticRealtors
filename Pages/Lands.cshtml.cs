@@ -57,7 +57,7 @@ namespace MajesticRealtors.Pages
             }
             catch (Exception e)
             {
-                _logger.LogError("Error during API call - Housing", e);
+                _logger.LogError("Error during API call - Lands", e);
             }
         }
 
