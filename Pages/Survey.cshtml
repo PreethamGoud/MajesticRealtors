@@ -1,0 +1,87 @@
+﻿@page
+@model MajesticRealtors.Pages.SurveyModel
+@{
+    ViewData["Title"] = "Survey";
+    var TheFavHouses = (IList<MajesticRealtors.DreamHouses>)ViewData["DreamHouseList"];
+}
+
+<link rel="stylesheet" href="/css/UserForm.css" type="text/css" />
+<br />
+<br />
+<br />
+<br />
+<div margin="auto">
+    <h3 class="display-6 align-content-center">I would love to stay at the place ...!!</h3></ hr>
+    <br />
+    <br />
+    <form method="post">
+        <dl class="row">
+
+            <dt class="col-sm-6">
+                Near to the community
+            </dt>
+            <dd class="col-sm-6">
+                <input type="text" class=" form-control mr-sm-2 col-sm-6" name="CommunityArea" placeholder="Grand Boulevard" size="40" />
+            </dd>
+
+            <dt class="col-sm-6">
+                That would be good for
+            </dt>
+            <dd class="col-sm-6">
+                <input type="text" class=" form-control mr-sm-2 col-sm-6" name="PropertyType" placeholder="Artist Live/Work Space" size="40" />
+            </dd>
+
+            <dt class="col-sm-6">
+                Located at
+            </dt>
+            <dd class="col-sm-6">
+                <input type="text" class=" form-control mr-sm-2 col-sm-6" name="Street" placeholder="West Fifth Ave" size="40" />
+            </dd>
+
+            <dt class="col-sm-6">
+                As big or small as
+            </dt>
+            <dd class="col-sm-6">
+                <input type="text" class=" form-control mr-sm-2 col-sm-6" name="PlotSize" placeholder="4000" size="40" />
+
+            </dd>
+
+            <dt class="col-sm-6">
+                Built or Maintianed by
+            </dt>
+            <dd class="col-sm-6">
+                <input type="text" class=" form-control mr-sm-2 col-sm-6" name="ManagementCompany" placeholder="Millenia Apartments" size="100" />
+            </dd>
+
+        </dl>
+        <div class="center-container">
+        <input id="Button1" type="submit" class="btn btn-primary" value="Submit" />
+        </div>
+    </form>
+</div>
+
+<div>
+    <hr />
+    <table class="table table-bordered table-hover">
+        <tr id="table-header">
+            <th>Community Area</th>
+            <th>Property Type</th>
+            <th>Street</th>
+            <th>Plot Size</th>
+            <th>Management Company</th>
+        </tr>
+        @{
+            foreach (MajesticRealtors.DreamHouses TheFavHouse in TheFavHouses)
+            {
+                <tr>
+                    <td>@TheFavHouse.CommunityArea</td>
+                    <td>@TheFavHouse.PropertyType</td>
+                    <td>@TheFavHouse.Street</td>
+                    <td>@TheFavHouse.PlotSize</td>
+                    <td>@TheFavHouse.ManagementCompany</td>
+                </tr>
+            }
+
+        }
+    </table>
+</div>

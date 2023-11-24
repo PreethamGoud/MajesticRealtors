@@ -101,16 +101,17 @@
 }
 
 body {
-  margin: 0;
-  font-family: var(--bs-body-font-family);
-  font-size: var(--bs-body-font-size);
-  font-weight: var(--bs-body-font-weight);
-  line-height: var(--bs-body-line-height);
-  color: var(--bs-body-color);
-  text-align: var(--bs-body-text-align);
-  background-color: var(--bs-body-bg);
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    margin: 0;
+    font-family: var(--bs-body-font-family);
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-body-font-weight);
+    line-height: var(--bs-body-line-height);
+    color: var(--bs-body-color);
+    text-align: var(--bs-body-text-align);
+    background-color: var(--bs-body-bg);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    overflow-x: hidden;
 }
 
 hr {
@@ -12851,48 +12852,7 @@ p {
   color: #ffc800;
 }
 
-@media (min-width: 992px) {
-  #mainNav {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    border: none;
-    background-color: transparent;
-    transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
-  }
 
-  #mainNav .navbar-brand {
-    font-size: 1.5em;
-    transition: font-size 0.3s ease-in-out;
-  }
-
-  #mainNav .navbar-brand img {
-    height: 2rem;
-    transition: height 0.3s ease-in-out;
-  }
-
-  #mainNav.navbar-shrink {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    background-color: #212529;
-  }
-
-  #mainNav.navbar-shrink .navbar-brand {
-    font-size: 1.25em;
-  }
-
-  #mainNav.navbar-shrink .navbar-brand svg,
-  #mainNav.navbar-shrink .navbar-brand img {
-    height: 1.5rem;
-  }
-
-  #mainNav .navbar-nav .nav-item {
-    margin-right: 1rem;
-  }
-
-  #mainNav .navbar-nav .nav-item:last-child {
-    margin-right: 0;
-  }
-}
 
 header.masthead {
   padding-top: 10.5rem;
@@ -13376,4 +13336,29 @@ footer {
 .table .table-header {
     background: #ffc800;
     color: #333;
+}
+iframe {
+    display: block;
+    width: 90%;
+    max-width: 60rem;
+    height: 25em;
+    margin: 2rem auto;
+    border: 1px solid black;
+}
+
+.pagination {
+    margin: 0;
+}
+
+    .pagination li:hover {
+        cursor: pointer;
+    }
+
+.pagination-container {
+    width: 70%;
+    float: left;
+}
+
+.center-container {
+    text-align: center;
 }

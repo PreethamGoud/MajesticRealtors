@@ -7,7 +7,6 @@
 
 <div>
     </br></br></br></br>
-    <link rel="stylesheet" href="/css/StyleSheet.css" type="text/css" />
     <div class="container">
         <div>
             <form method="get">
@@ -34,21 +33,41 @@
             {
                 <div>
                     <br></br>
-                    <table class="table table-bordered table-hover">
-                        <tr id="table-header">
-                            <th>Property Name</th>
-                            <th>Address</th>
-                            <th>Community Area</th>
-                            <th>Community Number</th>
-                            <th>Units</th>
-                            <th>Phone_Number</th>
-                            <th>Management Company</th>
-                        </tr>
+                    <div class="row">
+                        <div class="col-3">
+                            <select class="form-control" name="state" id="maxRows">
+
+
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="70">70</option>
+                                <option value="100">100</option>
+                                <option value="5000">Show ALL Rows</option>
+                            </select>
+                        </div>
+                        <div class="col"></div>
+                        <div class="tb_search col-3">
+                            <input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search Houses" class="form-control">
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-hover" id="table-id">
+                        <thead class="thead-dark">
+                            <tr id="table-header">
+                                <th>Property Name</th>
+                                <th>Address</th>
+                                <th>Community Area</th>
+                                <th>Community No.</th>
+                                <th>Units</th>
+                                <th>Phone_Number</th>
+                                <th>Management Company</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         @{
-                            int FirstTenHouses = 0;
                             foreach (HouseData.Houses house in TheHousesList)
                             {
-                                FirstTenHouses = FirstTenHouses + 1;
                                 <tr>
                                     <td>@house.PropertyName</td>
                                     <td>@house.Address</td>
@@ -58,15 +77,36 @@
                                     <td>@house.PhoneNumber </td>
                                     <td>@house.ManagementCompany</td>
                                 </tr>
-
-                                if (FirstTenHouses == 10)
-                                { break; }
                             }
                         }
+                        </tbody>
                     </table>
+                    <div class='pagination-container'>
+                        <nav>
+                            <ul class="pagination">
+                                <!--	Here the JS Function Will Add the Rows -->
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="rows_count">Showing 1 to 10 of</div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm text-center">
+                            <iframe width="1000"
+                                    height="650"
+                                    style="border:0"
+                                    loading="lazy"
+                                    allowfullscreen
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCh9gjnT4-uMvZxeb8nD0pWDNiorIUEkuc&q=@TheHousesList,Chicago+IL">
+                            </iframe>
+                        </div>
+                    </div>
                 </div>
             }
 
         </div>
     </div>
 </div>
+<script src="./js/scripts.js" asp-append-version="true"></script>
