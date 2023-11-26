@@ -1,0 +1,89 @@
+﻿@page
+@model MajesticRealtors.Pages.SalariesModel
+@{
+    ViewData["Title"] = "Salaries";
+    var TheSalaryList = (List<Salaries>)ViewData["UserSalaryList"];
+}
+
+<div id="margindiv">
+    </br></br></br></br>
+    <div class="container">
+        <div>
+            <form method="get">
+                <div class="input-group row">
+                    <label for="SearchItem" style="color: #ffc800" class="control-label"> <strong>Search Salaries of Cincinnati by Department Name</strong></label>
+                    </br></br>
+                    <div style="color: #ffc800" class="col-2 font-weight-bold">Select Department Name</div>
+                    <select class="form-select col" aria-label="Large select example" name="query" asp-for="@Model.SearchArea" asp-items="ViewBag.SearchArea"></select>
+                    <div class="col-2">
+                        <input type="submit" value="Search" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+            @if (string.IsNullOrWhiteSpace(Model.SearchArea))
+            {
+                <div class="alert alert-light"> Please choose a Department Name.</div>
+            }
+            else if (TheSalaryList == null)
+            {
+                <div class="alert alert-info"> Data for houses in this @Model.SearchArea community area  not found.</div>
+            }
+            else
+
+            {
+                <div>
+                    <br></br>
+                    <div class="row">
+                        <div class="col-3">
+                            <select class="form-control" name="state" id="maxRows">
+
+
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="70">70</option>
+                                <option value="100">100</option>
+                                <option value="5000">Show ALL Rows</option>
+                            </select>
+                        </div>
+                        <div class="col"></div>
+                        <div class="tb_search col-3">
+                            <input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search Salaries" class="form-control">
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-hover" id="table-id">
+                        <thead class="thead-dark">
+                            <tr id="table-header">
+                                <th>Job Code</th>
+                                <th>Department Name</th>
+                                <th>Salary Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (Salaries Salary in TheSalaryList)
+                                {
+                                    <tr>
+                                        <td>@Salary.JobCode</td>
+                                        <td>@Salary.DepartmentName</td>
+                                        <td>@Salary.SalaryInfo</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    <div class='pagination-container'>
+                        <nav>
+                            <ul class="pagination">
+                                <!--	Here the JS Function Will Add the Rows -->
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="rows_count">Showing 1 to 10 of</div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
