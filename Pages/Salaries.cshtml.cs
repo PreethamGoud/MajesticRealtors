@@ -63,18 +63,20 @@ namespace MajesticRealtors.Pages
 
         private void InitAreaDropDown()
         {
-
-            //Read the neighborhood list from the text file.
-            try
+            AllAreaList = new List<string>
             {
-                string[] AllAreaList = System.IO.File.ReadAllLines("departments.txt");
-                ViewData["SearchArea"] = new SelectList(AllAreaList);
-            }
-            catch (Exception ex)
-            {
-                LogException(ex);
-            }
+                {"CAGIS - ETS" },
+                {"Department of Citizen Complaint Authority (CCA)" },
+                {"Department of Public Services" },
+                {"Employee Retirement System" },
+                {"Department of Finance" },
+                {"Internal Audit" },
+                {"Law Department" },
+                {"Department of Parks" },
+                {"Cincinnati Recreation Commission" },
+            };
 
+            ViewData["SearchArea"] = new SelectList(AllAreaList);
         }
         private void LogException(Exception ex)
         {

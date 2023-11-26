@@ -120,18 +120,82 @@ namespace MajesticRealtors.Pages
 
         private void InitAreaDropDown()
         {
-
-            //Read the neighborhood list from the text file.
-            try
+            AllAreaList = new List<string>
             {
-                string[] AllAreaList = System.IO.File.ReadAllLines("neighborhood.txt");
-                ViewData["SearchArea"] = new SelectList(AllAreaList);
-            }
-            catch (Exception ex)
-            {
-                LogException(ex);
-            }
+                {"Englewood" },
+                {"Edgewater"} ,
+                {"Roseland"} ,
+                {"Humboldt Park"} ,
+                {"Grand Boulevard"} ,
+                {"Woodlawn"} ,
+                {"Oakland"} ,
+                {"West Englewood"} ,
+                {"Near North Side"} ,
+                {"West Town"} ,
+                {"Montclare"} ,
+                {"Albany Park"} ,
+                {"Grand Boulevard"} ,
+                {"Woodlawn"} ,
+                {"Portage Park"} ,
+                {"Washington Park"} ,
+                {"Lake View"} ,
+                {"Greater Grand Crossing"} ,
+                {"Loop"} ,
+                {"Near West Side"} ,
+                {"North Lawndale"} ,
+                {"Auburn Gresham"} ,
+                {"West Town"} ,
+                {"Humboldt Park"} ,
+                {"Near North Side"} ,
+                {"South Shore"} ,
+                {"West Town"} ,
+                {"Near West Side"} ,
+                {"Logan Square"} ,
+                {"Austin"} ,
+                {"Uptown"} ,
+                {"East Garfield Park"} ,
+                {"Humboldt Park"} ,
+                {"Woodlawn"} ,
+                {"Oakland"} ,
+                {"Humboldt Park"} ,
+                {"Lake View"} ,
+                {"Lincoln Square"} ,
+                {"Douglas"} ,
+                {"Washington Park"} ,
+                {"Belmont Cragin"} ,
+                {"New City"} ,
+                {"North Lawndale"} ,
+                {"West Ridge"} ,
+                {"Chicago Lawn"} ,
+                {"Belmont Cragin"} ,
+                {"Near South Side"} ,
+                {"Uptown"} ,
+                {"Douglas"} ,
+                {"Austin"} ,
+                {"Lincoln Square"} ,
+                {"South Deering"} ,
+                {"Grand Boulevard"} ,
+                {"Logan Square"} ,
+                {"West Town"} ,
+                {"Hyde Park"} ,
+                {"Logan Square"} ,
+                {"Austin"} ,
+                {"Washington Park"} ,
+                {"Douglas"} ,
+                {"Grand Boulevard"} ,
+                {"Near West Side"} ,
+                {"Washington Park"} ,
+                {"North Lawndale"} ,
+                {"Lower West Side"} ,
+                {"New City"} ,
+                {"West Town"} ,
+                {"East Garfield Park"} ,
+                {"North Lawndale"} ,
+                {"Englewood"} ,
+                {"Near South Side"} ,
+            };
 
+            ViewData["SearchArea"] = new SelectList(AllAreaList);
         }
         private void LogException(Exception ex)
         {
