@@ -13362,3 +13362,9 @@ iframe {
 .center-container {
     text-align: center;
 }
+
+#margindiv {
+    margin-left: 4rem;
+    margin-right: 4rem;
+    margin-bottom: 4rem;
+}

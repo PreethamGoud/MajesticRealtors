@@ -5,20 +5,23 @@ using System.Net;
 using System.IO;
 using System;
 using System.Linq.Expressions;
+using AllPropertiesData;
+using HouseData;
+using LandData;
 using Microsoft.Extensions.Configuration;
 
 namespace MajesticRealtors.Pages
 {
-    public class HousesModel : PageModel
+    public class AllPropertiesModel : PageModel
     {
         [BindProperty]
         public SelectList AreaList { get; set; }
         public string SearchArea { get; set; }
         public List<string> AllAreaList { get; set; }
 
-        private readonly ILogger<HousesModel> _logger;
+        private readonly ILogger<AllPropertiesModel> _logger;
 
-        public HousesModel(ILogger<HousesModel> logger)
+        public AllPropertiesModel(ILogger<AllPropertiesModel> logger)
         {
             _logger = logger;
         }
@@ -27,13 +30,12 @@ namespace MajesticRealtors.Pages
         {
             InitAreaDropDown();
 
-            //Get the data
             using (var webClient = new WebClient())
             {
                 string Houses_data = string.Empty;
                 try
                 {
-                    Houses_data = webClient.DownloadString("https://data.cityofchicago.org/resource/s6ha-ppgi.json?community_area="+query);
+                    Houses_data = webClient.DownloadString("https://data.cityofchicago.org/resource/s6ha-ppgi.json?community_area=" + query);
                 }
                 catch (Exception e)
                 {
@@ -42,24 +44,75 @@ namespace MajesticRealtors.Pages
                 }
                 var AllHousing = HouseData.Houses.FromJson(Houses_data);
 
+                string Lands_data = string.Empty;
+                try
+                {
+                    Lands_data = webClient.DownloadString("https://data.cityofchicago.org/resource/aksk-kvfp.json");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error during API call - Land Inventory", e);
+
+                }
+
+
+                var AllLands = Lands.FromJson(Lands_data);
+
                 if (!string.IsNullOrWhiteSpace(query))
                 {
                     var AllhousingList = AllHousing.ToList();
                     var CommunityHousing = AllhousingList.FindAll(x => string.Equals(x.CommunityArea, query, StringComparison.OrdinalIgnoreCase)).ToList();
 
-                    if (CommunityHousing != null && CommunityHousing.Count > 0)
+                    var AlllandsList = AllLands.ToList();
+                    var CommunityLands = AlllandsList.FindAll(x => string.Equals(x.CommunityAreaName, query, StringComparison.OrdinalIgnoreCase)).ToList();
+
+                    List<AllProperties> CommunityProperties = new List<AllProperties>();
+
+                    foreach (var CommunityHouse in CommunityHousing)
+                    {
+                        CommunityProperties.Add(new AllProperties
+                        {
+                            CommunityArea = CommunityHouse.CommunityArea,
+                            CommunityAreaNumber = CommunityHouse.CommunityAreaNumber,
+                            PropertyType = "House",
+                            PropertyName = CommunityHouse.PropertyName,
+                            Address = CommunityHouse.Address,
+                            ZipCode = CommunityHouse.ZipCode,
+                            ManagementCompany = CommunityHouse.ManagementCompany,
+                            Latitude = CommunityHouse.Latitude,
+                            Longitude = CommunityHouse.Longitude
+                        });
+                    }
+
+                    foreach (var CommunityLand in CommunityLands)
+                    {
+                        CommunityProperties.Add(new AllProperties
+                        {
+                            CommunityArea = CommunityLand.CommunityAreaName,
+                            CommunityAreaNumber = CommunityLand.CommunityAreaNumber,
+                            PropertyType = "Land",
+                            PropertyName = CommunityLand.ManagingOrganization,
+                            Address = CommunityLand.Address,
+                            ZipCode = CommunityLand.ZipCode,
+                            ManagementCompany = CommunityLand.ManagingOrganization,
+                            Latitude = CommunityLand.Latitude,
+                            Longitude = CommunityLand.Longitude
+                        });
+                    }
+
+                    if (CommunityProperties != null && CommunityProperties.Count > 0)
                     {
 
-                        ViewData["UserHousesList"] = CommunityHousing;
+                        ViewData["UserPropertiesList"] = CommunityProperties;
                     }
                     else
                     {
-                        ViewData["UserHousesList"] = null;
+                        ViewData["UserPropertiesList"] = null;
                     }
                 }
                 else
                 {
-                    ViewData["UserHousesList"] = null;
+                    ViewData["UserPropertiesList"] = null;
                 }
                 SearchArea = query;
             }
@@ -163,5 +216,4 @@ namespace MajesticRealtors.Pages
         }
 
     }
-
 }
