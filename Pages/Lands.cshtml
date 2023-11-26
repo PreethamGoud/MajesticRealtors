@@ -1,11 +1,13 @@
 ﻿@page
+@inject IConfiguration Configuration
 @model MajesticRealtors.Pages.LandsModel
 @{
     ViewData["Title"] = "LandInventory";
     var TheLandsList = (List<LandData.Lands>)ViewData["UserLandsList"];
+    var googleMapsApiKey = Configuration["GoogleMapsApiKey"];
 }
 
-<div>
+<div id="margindiv">
     </br></br></br></br></br>
     <div class="container">
 
@@ -33,7 +35,27 @@
         {
             <div>
                 <br></br>
-                <table class="table table-bordered table-hover">
+                <div class="row">
+                    <div class="col-3">
+                        <select class="form-control" name="state" id="maxRows">
+
+
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="70">70</option>
+                            <option value="100">100</option>
+                            <option value="5000">Show ALL Rows</option>
+                        </select>
+                    </div>
+                    <div class="col"></div>
+                    <div class="tb_search col-3">
+                        <input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search Lands" class="form-control">
+                    </div>
+                </div>
+                <table class="table table-bordered table-hover" id="table-id">
+                    <thead class="thead-dark">
                     <tr id="table-header">
                         <th>Property Status</th>
                         <th>Managing Org</th>
@@ -44,12 +66,11 @@
                         <th>Latitude</th>
                         <th>Longitude</th>
                     </tr>
+                    </thead>
                     @{
-                        int FirstTenLands = 0;
                         foreach (LandData.Lands land in TheLandsList)
                         {
-                            FirstTenLands = FirstTenLands + 1;
-                            <tr>
+                            <tr data-address="@land.Address">
                                 <td>@land.PropertyStatus</td>
                                 <td>@land.ManagingOrganization</td>
                                 <td>@land.CommunityAreaName</td>
@@ -59,12 +80,28 @@
                                 <td>@land.Latitude</td>
                                 <td>@land.Longitude</td>
                             </tr>
-                            if (FirstTenLands == 10)
-                            { break; }
                         }
                     }
                 </table>
+
+                <div class='pagination-container'>
+                    <nav>
+                        <ul class="pagination">
+                            <!--	Here the JS Function Will Add the Rows -->
+                        </ul>
+                    </nav>
+                </div>
+                <div class="rows_count">Showing 1 to 10 of</div>
+
+                <div class="center-container">
+                    <br></br>
+                    <div id="map" style="height: 400px; margin-top: 20px;"></div>
+                    <br></br>
+                    <button id="navigate-btn" class="btn btn-primary">Navigate to Location</button>
+                </div>
             </div>
+
+            <script src="https://maps.googleapis.com/maps/api/js?key=@googleMapsApiKey&callback=initMap" async defer></script>
         }
     </div>
 </div>

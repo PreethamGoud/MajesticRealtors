@@ -2,23 +2,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Net;
-using System.IO;
-using System;
-using System.Linq.Expressions;
-using Microsoft.Extensions.Configuration;
 
 namespace MajesticRealtors.Pages
 {
-    public class HousesModel : PageModel
+    public class SalariesModel : PageModel
     {
         [BindProperty]
         public SelectList AreaList { get; set; }
         public string SearchArea { get; set; }
         public List<string> AllAreaList { get; set; }
 
-        private readonly ILogger<HousesModel> _logger;
+        private readonly ILogger<SalariesModel> _logger;
 
-        public HousesModel(ILogger<HousesModel> logger)
+        public SalariesModel(ILogger<SalariesModel> logger)
         {
             _logger = logger;
         }
@@ -30,36 +26,36 @@ namespace MajesticRealtors.Pages
             //Get the data
             using (var webClient = new WebClient())
             {
-                string Houses_data = string.Empty;
+                string Salaries_Data = string.Empty;
                 try
                 {
-                    Houses_data = webClient.DownloadString("https://data.cityofchicago.org/resource/s6ha-ppgi.json?community_area="+query);
+                    Salaries_Data = webClient.DownloadString("https://cityofcincy.azurewebsites.net/Data/GetData");
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Error during API call - Housing", e);
+                    Console.WriteLine("Error during API call - Salaries", e);
 
                 }
-                var AllHousing = HouseData.Houses.FromJson(Houses_data);
+                var AllSalaries = Salaries.FromJson(Salaries_Data);
 
                 if (!string.IsNullOrWhiteSpace(query))
                 {
-                    var AllhousingList = AllHousing.ToList();
-                    var CommunityHousing = AllhousingList.FindAll(x => string.Equals(x.CommunityArea, query, StringComparison.OrdinalIgnoreCase)).ToList();
+                    var AllSalariesList = AllSalaries.ToList();
+                    var SalaryFilter = AllSalariesList.FindAll(x => string.Equals(x.DepartmentName, query, StringComparison.OrdinalIgnoreCase)).ToList();
 
-                    if (CommunityHousing != null && CommunityHousing.Count > 0)
+                    if (SalaryFilter != null && SalaryFilter.Count > 0)
                     {
 
-                        ViewData["UserHousesList"] = CommunityHousing;
+                        ViewData["UserSalaryList"] = SalaryFilter;
                     }
                     else
                     {
-                        ViewData["UserHousesList"] = null;
+                        ViewData["UserSalaryList"] = null;
                     }
                 }
                 else
                 {
-                    ViewData["UserHousesList"] = null;
+                    ViewData["UserSalaryList"] = null;
                 }
                 SearchArea = query;
             }
@@ -71,10 +67,11 @@ namespace MajesticRealtors.Pages
             //Read the neighborhood list from the text file.
             try
             {
-                string[] AllAreaList = System.IO.File.ReadAllLines("neighborhood.txt");
+                string[] AllAreaList = System.IO.File.ReadAllLines("departments.txt");
                 ViewData["SearchArea"] = new SelectList(AllAreaList);
             }
-            catch(Exception ex){
+            catch (Exception ex)
+            {
                 LogException(ex);
             }
 
@@ -96,7 +93,5 @@ namespace MajesticRealtors.Pages
                 // If logging fails, just ignore it to avoid infinite loop of exceptions
             }
         }
-
     }
-
 }
