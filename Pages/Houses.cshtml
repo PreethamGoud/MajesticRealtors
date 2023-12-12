@@ -13,9 +13,9 @@
         <div>
             <form method="get">
                 <div class="input-group row">
-                    <label for="SearchItem" style="color: #ffc800" class="control-label"> <strong>Housing Inventories</strong></label>
+                    <label for="SearchItem" class="control-label"> <strong>Housing Inventories</strong></label>
                     </br></br>
-                    <div style="color: #ffc800" class="col-2 font-weight-bold">Select Community Area</div>
+                    <div class="col-2 font-weight-bold">Select Community Area</div>
                         <select class="form-select col" aria-label="Large select example" name="query" asp-for="@Model.SearchArea" asp-items="ViewBag.SearchArea"></select>
                     <div class="col-2">
                         <input type="submit" value="Search" class="btn btn-primary" />
